@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="label_color">#777</color>
+    <color name="attr">#fff</color>
+    <color name="black">#000</color>
+    <color name="red">#E82C0C</color>
+    <color name="sort_text_item">#fff</color>
+</resources>

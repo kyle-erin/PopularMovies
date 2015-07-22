@@ -5,10 +5,12 @@ package com.kyle.popularmovies.data;
  */
 public class Movie
 {
-  public Boolean adult;
   public Integer id;
   public String title;
   public String poster_path;
+  public String release_date;
+  public String vote_average;
+  public String overview;
 
   public Movie(){}
 }

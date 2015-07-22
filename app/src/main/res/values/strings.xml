@@ -3,4 +3,17 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="sort_names">
+        <item>Most Popular</item>
+        <item>Highest Rated</item>
+    </string-array>
+    <string name="title_activity_movie_info">MovieInfoActivity</string>
+    <string name="poster_desc">The poster of the movie.</string>
+    <string name="label_plot">Synopsis</string>
+    <string name="label_rating">Rating</string>
+    <string name="label_release">Release Date</string>
+    <string name="placeholder">Placeholder Text</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet vestibulum orci. Nunc fermentum in felis sit amet semper. Praesent commodo, neque sit amet accumsan mattis, enim metus imperdiet neque, sit amet dapibus nisl augue sit amet est. Phasellus posuere erat dui, ac laoreet augue rutrum non. Mauris lobortis, sem gravida aliquet volutpat, tellus ante volutpat nisi, vel egestas sem leo id enim. Sed viverra sollicitudin ante, vel scelerisque erat fringilla vel. Duis velit neque, rhoncus a urna a, posuere vulputate magna.</string>
+    <string name="label_title">Title</string>
 </resources>

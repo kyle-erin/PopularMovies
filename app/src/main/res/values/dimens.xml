@@ -2,4 +2,10 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="title_size">25sp</dimen>
+    <dimen name="label_size">12sp</dimen>
+    <dimen name="attr_size">15sp</dimen>
+    <dimen name="portrait_height">350dp</dimen>
+    <dimen name="label_size_tablet">17sp</dimen>
+    <dimen name="attr_size_tablet">22sp</dimen>
 </resources>
