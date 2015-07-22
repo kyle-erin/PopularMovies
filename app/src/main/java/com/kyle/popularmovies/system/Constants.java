@@ -5,5 +5,8 @@ package com.kyle.popularmovies.system;
  */
 public class Constants
 {
-  public static final String API_KEY = "YOUR_API_KEY";
+  /**
+   * The api key for TheMovieDatabase
+   */
+  public static final String API_KEY = "API_KEY";
 }
