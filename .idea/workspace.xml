@@ -32,28 +32,9 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kyle/popularmovies/activities/MovieListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="111" column="28" selection-start-line="111" selection-start-column="28" selection-end-line="111" selection-end-column="28" />
+              <caret line="179" column="36" selection-start-line="179" selection-start-column="36" selection-end-line="179" selection-end-column="36" />
               <folding>
-                <element signature="docComment;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;field#LOG_TAG#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;field#SORT_POP_TITLE#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;field#SORT_RATING_TITLE#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;field#SORT_OPTIONS#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;field#UNKNOWN_SORT_ITEM_ERR#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;field#CONNECTION_ERR_MSG#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;field#MOVIES_KEY#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;field#GRID_POS#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;field#mSortSpinner#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;field#mData#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;method#onSaveInstanceState#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="method#onSaveInstanceState#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;method#checkInternet#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;method#onEventMainThread#0;class#MovieListActivity#0" expanded="false" />
                 <element signature="e#4716#4756#0" expanded="true" />
-                <element signature="method#onEventMainThread#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="docComment;method#onItemSelected#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="method#onItemSelected#0;class#MovieListActivity#0" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#MovieListActivity#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1699,7 +1680,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1723,28 +1704,9 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kyle/popularmovies/activities/MovieListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="111" column="28" selection-start-line="111" selection-start-column="28" selection-end-line="111" selection-end-column="28" />
+          <caret line="179" column="36" selection-start-line="179" selection-start-column="36" selection-end-line="179" selection-end-column="36" />
           <folding>
-            <element signature="docComment;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;field#LOG_TAG#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;field#SORT_POP_TITLE#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;field#SORT_RATING_TITLE#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;field#SORT_OPTIONS#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;field#UNKNOWN_SORT_ITEM_ERR#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;field#CONNECTION_ERR_MSG#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;field#MOVIES_KEY#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;field#GRID_POS#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;field#mSortSpinner#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;field#mData#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;method#onSaveInstanceState#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="method#onSaveInstanceState#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;method#checkInternet#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;method#onEventMainThread#0;class#MovieListActivity#0" expanded="false" />
             <element signature="e#4716#4756#0" expanded="true" />
-            <element signature="method#onEventMainThread#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="docComment;method#onItemSelected#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="method#onItemSelected#0;class#MovieListActivity#0" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#MovieListActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>

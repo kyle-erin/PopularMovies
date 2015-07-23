@@ -177,25 +177,33 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
   @Override
   public void onItemSelected( AdapterView<?> parent, View view, int position, long id )
   {
-    String item = (String) parent.getItemAtPosition( position );
-    Intent getMovies = new Intent( this, GetMoviesService.class );
-    switch ( item )
+    // Check for internet connection
+    if ( checkInternet() )
     {
-      case SORT_POP_TITLE:
-        // Sort by popularity
-        getMovies.putExtra( GetMoviesService.EXTRA_SORT_ORDER, GetMoviesService.SORT_POPULARITY );
-        break;
-      case SORT_RATING_TITLE:
-        // Sort by rating
-        getMovies.putExtra( GetMoviesService.EXTRA_SORT_ORDER, GetMoviesService.SORT_RATING );
-        break;
-      default:
-        Log.e( LOG_TAG, UNKNOWN_SORT_ITEM_ERR );
-        break;
-    }
+      String item = (String) parent.getItemAtPosition( position );
+      Intent getMovies = new Intent( this, GetMoviesService.class );
+      switch ( item )
+      {
+        case SORT_POP_TITLE:
+          // Sort by popularity
+          getMovies.putExtra( GetMoviesService.EXTRA_SORT_ORDER, GetMoviesService.SORT_POPULARITY );
+          break;
+        case SORT_RATING_TITLE:
+          // Sort by rating
+          getMovies.putExtra( GetMoviesService.EXTRA_SORT_ORDER, GetMoviesService.SORT_RATING );
+          break;
+        default:
+          Log.e( LOG_TAG, UNKNOWN_SORT_ITEM_ERR );
+          break;
+      }
 
-    // Start service and wait for the movies.
-    startService( getMovies );
+      // Start service and wait for the movies.
+      startService( getMovies );
+    }
+    else
+    {
+      Toast.makeText( this, CONNECTION_ERR_MSG, Toast.LENGTH_LONG ).show();
+    }
 
   }
 
