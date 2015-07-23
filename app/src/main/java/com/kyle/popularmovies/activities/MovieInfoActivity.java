@@ -73,11 +73,14 @@ public class MovieInfoActivity extends Activity
     // If the selected movie was set, show all of its data.
     if ( mSelected != null )
     {
-      Picasso.with( this ).load( TMDB_IMG_URL + mSelected.poster_path ).into( mPoster );
-      mTitle.setText( mSelected.original_title.isEmpty() ? EMPTY_STR : mSelected.original_title );
-      mRelease.setText( mSelected.release_date.isEmpty() ? EMPTY_STR : mSelected.release_date );
-      mVote.setText( mSelected.vote_average.isEmpty() ? EMPTY_STR : mSelected.vote_average );
-      mSynopsis.setText( mSelected.overview.isEmpty() ? EMPTY_STR : mSelected.overview );
+      if ( mSelected.poster_path != null && mSelected.poster_path.length() > 0 )
+      {
+        Picasso.with( this ).load( TMDB_IMG_URL + mSelected.poster_path ).into( mPoster );
+      }
+      mTitle.setText((mSelected.original_title != null &&  mSelected.original_title.isEmpty()) ? EMPTY_STR : mSelected.original_title );
+      mRelease.setText( (mSelected.release_date != null && mSelected.release_date.isEmpty()) ? EMPTY_STR : mSelected.release_date );
+      mVote.setText( (mSelected.vote_average != null && mSelected.vote_average.isEmpty()) ? EMPTY_STR : mSelected.vote_average );
+      mSynopsis.setText( (mSelected.overview != null && mSelected.overview.isEmpty()) ? EMPTY_STR : mSelected.overview );
     }
   }
 

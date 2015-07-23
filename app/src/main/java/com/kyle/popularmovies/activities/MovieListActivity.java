@@ -19,6 +19,8 @@ import com.kyle.popularmovies.data.Movie;
 import com.kyle.popularmovies.views.MovieAdapter;
 import com.kyle.popularmovies.R;
 
+import java.io.IOException;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
@@ -69,6 +71,11 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
   private static final String GRID_POS = "grid_position";
 
   /**
+   * Error message for an IOException, most likely when Constants.API_KEY isn't set correctly.
+   */
+  private static final String API_ERR_MSG = "There was an error in retrieving the movie list.";
+
+  /**
    * The GridView that holds all of the movie posters.
    */
   @Bind( R.id.gridview )
@@ -117,6 +124,7 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
     {
       // Load saved data
       mData = (Movie[])savedInstanceState.getParcelableArray( MOVIES_KEY );
+      EventBus.getDefault().post( mData );
       mGridView.setSelection( savedInstanceState.getInt( GRID_POS ) );
     }
   }
