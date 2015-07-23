@@ -8,5 +8,5 @@ public class Constants
   /**
    * The api key for TheMovieDatabase
    */
-  public static final String API_KEY = "59a34a3bf2e1587d06ba92eb172e3e0b";
+  public static final String API_KEY = "API_KEY";
 }
