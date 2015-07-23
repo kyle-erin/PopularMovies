@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import de.greenrobot.event.EventBus;
@@ -173,7 +174,13 @@ public class GetMoviesService extends IntentService
       }
 
       // Return data
-    } catch ( IOException e )
+    }
+    catch (UnknownHostException e)
+    {
+      // Either no internet connection or the api is down
+      EventBus.getDefault().post( e );
+    }
+    catch ( IOException e )
     {
       Log.e(LOG_TAG, e.toString());
     }  finally

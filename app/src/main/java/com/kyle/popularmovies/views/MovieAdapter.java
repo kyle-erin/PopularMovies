@@ -25,12 +25,12 @@ public class MovieAdapter extends BaseAdapter
   /**
    * Width of the poster ImageView.
    */
-  private static final int POSTER_WIDTH = 200;
+  private static final int POSTER_WIDTH = 350;
 
   /**
    * Height of the poster ImageView.
    */
-  private static final int POSTER_HEIGHT = 200;
+  private static final int POSTER_HEIGHT = 500;
 
   /**
    * Context of the activity that creates this adapter.
