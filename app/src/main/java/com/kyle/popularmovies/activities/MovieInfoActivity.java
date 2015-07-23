@@ -1,16 +1,13 @@
 package com.kyle.popularmovies.activities;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kyle.popularmovies.R;
 import com.kyle.popularmovies.data.Movie;
-import com.kyle.popularmovies.views.MovieAdapter;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -32,13 +29,18 @@ public class MovieInfoActivity extends Activity
   public static Movie mSelected;
 
   /**
+   * When an item attribute is empty.
+   */
+  private static final String EMPTY_STR = "N/A";
+
+  /**
    * Displays the poster of the movie.
    */
   @Bind( R.id.poster )
   ImageView mPoster;
 
   /**
-   * Displays the title of the movie.
+   * Displays the original_title of the movie.
    */
   @Bind( R.id.title )
   TextView mTitle;
@@ -72,10 +74,10 @@ public class MovieInfoActivity extends Activity
     if ( mSelected != null )
     {
       Picasso.with( this ).load( TMDB_IMG_URL + mSelected.poster_path ).into( mPoster );
-      mTitle.setText( mSelected.title );
-      mRelease.setText( mSelected.release_date );
-      mVote.setText( mSelected.vote_average );
-      mSynopsis.setText( mSelected.overview );
+      mTitle.setText( mSelected.original_title.isEmpty() ? EMPTY_STR : mSelected.original_title );
+      mRelease.setText( mSelected.release_date.isEmpty() ? EMPTY_STR : mSelected.release_date );
+      mVote.setText( mSelected.vote_average.isEmpty() ? EMPTY_STR : mSelected.vote_average );
+      mSynopsis.setText( mSelected.overview.isEmpty() ? EMPTY_STR : mSelected.overview );
     }
   }
 

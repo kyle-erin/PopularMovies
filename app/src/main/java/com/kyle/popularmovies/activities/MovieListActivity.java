@@ -30,19 +30,19 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
   private static final String LOG_TAG = MovieListActivity.class.getSimpleName();
 
   /**
-   * The title to display for the sorting option: Most Popular.
+   * The original_title to display for the sorting option: Most Popular.
    */
   private static final String SORT_POP_TITLE = "Most Popular";
 
   /**
-   * The title to display for the sorting option: Highest Rated.
+   * The original_title to display for the sorting option: Highest Rated.
    */
   private static final String SORT_RATING_TITLE = "Highest Rated";
 
   /**
    * A list of all sorting options to be displayed in the spinner.
    */
-  private static final String[] SORT_OPTIONS = {SORT_POP_TITLE, SORT_RATING_TITLE};
+  private static final String[] SORT_OPTIONS = { SORT_POP_TITLE, SORT_RATING_TITLE };
 
   /**
    * An error message if the user somehow clicks an option we didn't expect.
@@ -72,7 +72,7 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
     // Load spinner with sorting options
     ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.sort_text_item, SORT_OPTIONS );
     adapter.setDropDownViewResource( R.layout.sort_text_checked_item );
-    mSortSpinner.setAdapter(adapter);
+    mSortSpinner.setAdapter( adapter );
     mSortSpinner.setOnItemSelectedListener( this );
 
     // Start download of data
@@ -94,16 +94,16 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
    * Determine which sorting option was selected and start a new service to fetch movies based
    * on that sorting method.
    *
-   * @param parent The parent view.
-   * @param view The current view.
+   * @param parent   The parent view.
+   * @param view     The current view.
    * @param position The position that the item is in the spinner.
-   * @param id The id of the item in the spinner.
+   * @param id       The id of the item in the spinner.
    */
   @Override
   public void onItemSelected( AdapterView<?> parent, View view, int position, long id )
   {
-    String item = (String)parent.getItemAtPosition( position );
-    Intent getMovies = new Intent(this, GetMoviesService.class);
+    String item = (String) parent.getItemAtPosition( position );
+    Intent getMovies = new Intent( this, GetMoviesService.class );
     switch ( item )
     {
       case SORT_POP_TITLE:
@@ -115,7 +115,7 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
         getMovies.putExtra( GetMoviesService.EXTRA_SORT_ORDER, GetMoviesService.SORT_RATING );
         break;
       default:
-        Log.e(LOG_TAG, UNKNOWN_SORT_ITEM_ERR );
+        Log.e( LOG_TAG, UNKNOWN_SORT_ITEM_ERR );
         break;
     }
 
