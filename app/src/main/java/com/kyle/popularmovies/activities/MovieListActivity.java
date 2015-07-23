@@ -1,7 +1,10 @@
 package com.kyle.popularmovies.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.kyle.popularmovies.data.GetMoviesService;
 import com.kyle.popularmovies.data.Movie;
@@ -50,6 +54,21 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
   private static final String UNKNOWN_SORT_ITEM_ERR = "An unknown sorting option was selected.";
 
   /**
+   * Error message shown when there is no internet connection.
+   */
+  private static final String CONNECTION_ERR_MSG = "There was a problem with your internet connection. Please try again, later.";
+
+  /**
+   * Key used for storing/retrieving the movie list from a bundle
+   */
+  private static final String MOVIES_KEY = "movie_list";
+
+  /**
+   * Key used for storing/retrieving the scroll position of the user.
+   */
+  private static final String GRID_POS = "grid_position";
+
+  /**
    * The GridView that holds all of the movie posters.
    */
   @Bind( R.id.gridview )
@@ -60,6 +79,11 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
    */
   @Bind( R.id.sort )
   Spinner mSortSpinner;
+
+  /**
+   * The array of movies that are displayed.
+   */
+  private Movie[] mData;
 
   @Override
   protected void onCreate( Bundle savedInstanceState )
@@ -75,8 +99,50 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
     mSortSpinner.setAdapter( adapter );
     mSortSpinner.setOnItemSelectedListener( this );
 
-    // Start download of data
-    startService( new Intent( this, GetMoviesService.class ) );
+    // Start download of data if internet connectivity
+    if ( savedInstanceState == null )
+    {
+      if ( checkInternet() )
+      {
+        startService( new Intent( this, GetMoviesService.class ) );
+      }
+      else
+      {
+        // Tell user of internet issue
+        Toast.makeText( this, CONNECTION_ERR_MSG, Toast.LENGTH_LONG ).show();
+
+      }
+    }
+    else
+    {
+      // Load saved data
+      mData = (Movie[])savedInstanceState.getParcelableArray( MOVIES_KEY );
+      mGridView.setSelection( savedInstanceState.getInt( GRID_POS ) );
+    }
+  }
+
+  /**
+   * Save position and contents of the GridView, for on orientation change.
+   * @param state The current state before change.
+   */
+  @Override
+  public void onSaveInstanceState(Bundle state) {
+    // Save the current list of movies
+    state.putParcelableArray( MOVIES_KEY, mData );
+    // Save the position the user was in the list
+    state.putInt( GRID_POS, mGridView.getLastVisiblePosition() );
+
+    super.onSaveInstanceState(state);
+  }
+
+  /**
+   * @return Do I have an internet connection?
+   */
+  private boolean checkInternet()
+  {
+    ConnectivityManager cm = (ConnectivityManager) getSystemService( Context.CONNECTIVITY_SERVICE );
+    NetworkInfo info = cm.getActiveNetworkInfo();
+    return info != null && info.isConnected();
   }
 
   /**
@@ -87,6 +153,7 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
   @SuppressWarnings( "UnusedDeclaration" )
   public void onEventMainThread( Movie[] data )
   {
+    mData = data;
     mGridView.setAdapter( new MovieAdapter( this, data ) );
   }
 
