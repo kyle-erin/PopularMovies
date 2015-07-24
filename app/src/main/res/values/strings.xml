@@ -16,4 +16,6 @@
     <string name="placeholder">Placeholder Text</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet vestibulum orci. Nunc fermentum in felis sit amet semper. Praesent commodo, neque sit amet accumsan mattis, enim metus imperdiet neque, sit amet dapibus nisl augue sit amet est. Phasellus posuere erat dui, ac laoreet augue rutrum non. Mauris lobortis, sem gravida aliquet volutpat, tellus ante volutpat nisi, vel egestas sem leo id enim. Sed viverra sollicitudin ante, vel scelerisque erat fringilla vel. Duis velit neque, rhoncus a urna a, posuere vulputate magna.</string>
     <string name="label_title">Title</string>
+    <string name="title_activity_test_get_trailers_service">TestGetTrailersServiceActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>

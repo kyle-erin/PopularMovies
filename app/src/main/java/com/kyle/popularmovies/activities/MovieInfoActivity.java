@@ -1,17 +1,22 @@
 package com.kyle.popularmovies.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kyle.popularmovies.R;
+import com.kyle.popularmovies.data.GetTrailersService;
 import com.kyle.popularmovies.data.Movie;
+import com.kyle.popularmovies.data.Trailer;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * Lists detailed information about a movie that was selected.
@@ -22,6 +27,12 @@ public class MovieInfoActivity extends Activity
    * The url to fetch a movie poster, which is bigger than in MovieAdapter.
    */
   public static final String TMDB_IMG_URL = "http://image.tmdb.org/t/p/w500";
+
+  /**
+   * This activities debug tag.
+   */
+  private static final String LOG_TAG = MovieInfoActivity.class.getSimpleName();
+  private static final String DATA_KEY = "trailers";
 
   /**
    * The selected movie to display information about.
@@ -62,6 +73,7 @@ public class MovieInfoActivity extends Activity
    */
   @Bind( R.id.synopsis )
   TextView mSynopsis;
+  private Trailer[] mTrailers;
 
   @Override
   protected void onCreate( Bundle savedInstanceState )
@@ -69,6 +81,10 @@ public class MovieInfoActivity extends Activity
     super.onCreate( savedInstanceState );
     setContentView( R.layout.activity_movie_info );
     ButterKnife.bind( this );
+    EventBus.getDefault().register( this );
+
+    // Fetch trailers
+    startService( new Intent( this, GetTrailersService.class ) );
 
     // If the selected movie was set, show all of its data.
     if ( mSelected != null )
@@ -85,9 +101,24 @@ public class MovieInfoActivity extends Activity
   }
 
   @Override
+  public void onSaveInstanceState(Bundle state) {
+    // Save the current list of data
+    state.putParcelableArray( DATA_KEY, mTrailers );
+
+    super.onSaveInstanceState(state);
+  }
+
+  @Override
   public boolean onCreateOptionsMenu( Menu menu )
   {
     // Disable menu
     return false;
+  }
+
+  @SuppressWarnings( "UnusedDeclaration" )
+  public void onEventMainThread( Trailer[] trailers )
+  {
+    mTrailers = trailers;
+    Log.i(LOG_TAG, trailers.toString());
   }
 }
