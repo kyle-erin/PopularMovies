@@ -32,6 +32,10 @@ public class MovieInfoActivity extends Activity
    * This activities debug tag.
    */
   private static final String LOG_TAG = MovieInfoActivity.class.getSimpleName();
+
+  /**
+   * Key for fetching trailers.
+   */
   private static final String DATA_KEY = "trailers";
 
   /**
