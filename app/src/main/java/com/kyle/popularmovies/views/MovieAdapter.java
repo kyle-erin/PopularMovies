@@ -101,7 +101,14 @@ public class MovieAdapter extends BaseAdapter
     if ( item != null )
     {
       // Load poster
-      Picasso.with( mContext ).load( TMDB_IMG_URL + item.poster_path ).into( holder.imgPoster );
+      if ( item.poster_path != null )
+      {
+        Picasso.with( mContext ).load( TMDB_IMG_URL + item.poster_path ).into( holder.imgPoster );
+      }
+      else
+      {
+        Picasso.with( mContext ).load( R.drawable.placeholder ).into( holder.imgPoster );
+      }
 
       // Set onclick to bring the user to a details page
       holder.imgPoster.setOnClickListener( new View.OnClickListener()
