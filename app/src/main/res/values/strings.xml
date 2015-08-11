@@ -18,4 +18,10 @@
     <string name="label_title">Title</string>
     <string name="title_activity_test_get_trailers_service">TestGetTrailersServiceActivity</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="popular">Most Popular</string>
+    <string name="highest">Highest Rated</string>
+    <string name="placeholder_release">2015</string>
+    <string name="placeholder_length">120min</string>
+    <string name="placeholder_rating">8.1/10</string>
+    <string name="favorite_text">Favorite</string>
 </resources>

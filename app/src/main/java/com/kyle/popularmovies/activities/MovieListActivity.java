@@ -1,25 +1,25 @@
 package com.kyle.popularmovies.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.kyle.popularmovies.data.GetMoviesService;
 import com.kyle.popularmovies.data.Movie;
 import com.kyle.popularmovies.views.MovieAdapter;
 import com.kyle.popularmovies.R;
-
-import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,7 +28,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Lists movies by descending order based on popularity or rating.
  */
-public class MovieListActivity extends Activity implements AdapterView.OnItemSelectedListener
+public class MovieListActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
   /**
    * The tag used for debugging this class.
@@ -84,8 +84,8 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
   /**
    * The spinner that holds all of the sorting options.
    */
-  @Bind( R.id.sort )
-  Spinner mSortSpinner;
+//  @Bind( R.id.sort )
+//  Spinner mSortSpinner;
 
   /**
    * The array of movies that are displayed.
@@ -101,10 +101,10 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
     EventBus.getDefault().register( this );
 
     // Load spinner with sorting options
-    ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.sort_text_item, SORT_OPTIONS );
-    adapter.setDropDownViewResource( R.layout.sort_text_checked_item );
-    mSortSpinner.setAdapter( adapter );
-    mSortSpinner.setOnItemSelectedListener( this );
+    ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.support_simple_spinner_dropdown_item, SORT_OPTIONS );
+//    adapter.setDropDownViewResource( R.layout.sort_text_checked_item );
+//    mSortSpinner.setAdapter( adapter );
+//    mSortSpinner.setOnItemSelectedListener( this );
 
     // Start download of data if internet connectivity
     if ( savedInstanceState == null )
@@ -123,7 +123,7 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
     else
     {
       // Load saved data
-      mData = (Movie[])savedInstanceState.getParcelableArray( MOVIES_KEY );
+      mData = (Movie[]) savedInstanceState.getParcelableArray( MOVIES_KEY );
       EventBus.getDefault().post( mData );
       mGridView.setSelection( savedInstanceState.getInt( GRID_POS ) );
     }
@@ -131,16 +131,18 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
 
   /**
    * Save position and contents of the GridView, for on orientation change.
+   *
    * @param state The current state before change.
    */
   @Override
-  public void onSaveInstanceState(Bundle state) {
+  public void onSaveInstanceState( Bundle state )
+  {
     // Save the current list of movies
     state.putParcelableArray( MOVIES_KEY, mData );
     // Save the position the user was in the list
     state.putInt( GRID_POS, mGridView.getLastVisiblePosition() );
 
-    super.onSaveInstanceState(state);
+    super.onSaveInstanceState( state );
   }
 
   /**
@@ -153,6 +155,46 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
     return info != null && info.isConnected();
   }
 
+  @Override
+  public boolean onCreateOptionsMenu( Menu menu )
+  {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate( R.menu.menu_movie_list, menu );
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected( MenuItem item )
+  {
+    if ( checkInternet() )
+    {
+      Intent getMovies = new Intent( this, GetMoviesService.class );
+      switch ( item.getItemId() )
+      {
+        case R.id.popular:
+          // Sort by popularity
+          getMovies.putExtra( GetMoviesService.EXTRA_SORT_ORDER, GetMoviesService.SORT_POPULARITY );
+          break;
+        case R.id.highest:
+          // Sort by rating
+          getMovies.putExtra( GetMoviesService.EXTRA_SORT_ORDER, GetMoviesService.SORT_RATING );
+          break;
+        default:
+          Log.e( LOG_TAG, UNKNOWN_SORT_ITEM_ERR );
+          break;
+      }
+
+      // Start service and wait for the movies.
+      startService( getMovies );
+    }
+    else
+    {
+      Toast.makeText( this, CONNECTION_ERR_MSG, Toast.LENGTH_LONG ).show();
+    }
+
+    return true;
+  }
+
   /**
    * Loads the movies into the GridView.
    *
@@ -162,7 +204,9 @@ public class MovieListActivity extends Activity implements AdapterView.OnItemSel
   public void onEventMainThread( Movie[] data )
   {
     mData = data;
-    mGridView.setAdapter( new MovieAdapter( this, data ) );
+    MovieAdapter adapter = new MovieAdapter( this, mData );
+    mGridView.setAdapter( adapter );
+    adapter.notifyDataSetChanged();
   }
 
   /**

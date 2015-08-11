@@ -2,20 +2,10 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <!--<item name="android:spinnerItemStyle">@style/spinnerStyle</item>-->
-        <!--<item name="android:spinnerDropDownItemStyle">@style/spinnerStyle</item>-->
-
+        <item name="android:buttonStyle">@style/MovieButton</item>
     </style>
 
-    <!--<style name="spinnerStyle">-->
-        <!--<item name="android:textAppearance">@style/textAppearance</item>-->
-        <!--<item name="android:background">@color/black</item>-->
-    <!--</style>-->
-
-    <!--<style name="textAppearance">-->
-        <!--<item name="android:textColor">@color/red</item>-->
-        <!--<item name="android:background">@color/black</item>-->
-    <!--</style>-->
-
+    <style name="MovieButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@color/button_color</item>
+    </style>
 </resources>

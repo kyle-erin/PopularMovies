@@ -3,6 +3,7 @@ package com.kyle.popularmovies.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
@@ -51,7 +52,7 @@ public class MovieInfoActivity extends Activity
   /**
    * Displays the poster of the movie.
    */
-  @Bind( R.id.poster )
+  @Bind( R.id.movie_poster )
   ImageView mPoster;
 
   /**
@@ -97,11 +98,18 @@ public class MovieInfoActivity extends Activity
       {
         Picasso.with( this ).load( TMDB_IMG_URL + mSelected.poster_path ).into( mPoster );
       }
+
       mTitle.setText((mSelected.original_title != null &&  mSelected.original_title.isEmpty()) ? EMPTY_STR : mSelected.original_title );
-      mRelease.setText( (mSelected.release_date != null && mSelected.release_date.isEmpty()) ? EMPTY_STR : mSelected.release_date );
+      mRelease.setText( (mSelected.release_date != null && mSelected.release_date.isEmpty()) ? EMPTY_STR : formatDate( mSelected.release_date ) );
       mVote.setText( (mSelected.vote_average != null && mSelected.vote_average.isEmpty()) ? EMPTY_STR : mSelected.vote_average );
       mSynopsis.setText( (mSelected.overview != null && mSelected.overview.isEmpty()) ? EMPTY_STR : mSelected.overview );
     }
+  }
+
+  private String formatDate(String date)
+  {
+    String[] comps = date.split( "-" );
+    return comps.length > 0 ? comps[0] : date;
   }
 
   @Override

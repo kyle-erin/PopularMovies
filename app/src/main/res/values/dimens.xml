@@ -8,4 +8,8 @@
     <dimen name="portrait_height">350dp</dimen>
     <dimen name="label_size_tablet">17sp</dimen>
     <dimen name="attr_size_tablet">22sp</dimen>
+    <dimen name="release_size">20sp</dimen>
+    <dimen name="rating_size">12sp</dimen>
+    <dimen name="small">12sp</dimen>
+    <dimen name="medium">16sp</dimen>
 </resources>

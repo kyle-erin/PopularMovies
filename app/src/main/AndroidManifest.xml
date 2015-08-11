@@ -31,7 +31,11 @@
 
         <activity
             android:name=".activities.MovieInfoActivity"
-            android:label="@string/title_activity_movie_info">
+            android:label="@string/title_activity_movie_info"
+            android:parentActivityName=".activities.MovieListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MovieListActivity" />
         </activity>
     </application>
 

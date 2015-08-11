@@ -5,4 +5,8 @@
     <color name="black">#000</color>
     <color name="red">#E82C0C</color>
     <color name="sort_text_item">#fff</color>
+    <color name="title_color">#3E606F</color>
+    <color name="button_color">#91AA9D</color>
+    <color name="background">#FCFFF5</color>
+    <color name="text">#193441</color>
 </resources>
