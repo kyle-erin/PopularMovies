@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginBottom="5dp"
-        android:paddingLeft="10dp"
         android:background="@color/title_color"
         android:gravity="center_vertical"
+        android:paddingLeft="10dp"
         android:text="@string/placeholder"
         android:textColor="#fff"
         android:textSize="@dimen/title_size"/>
@@ -21,8 +21,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,6 +91,13 @@
                 android:text="@string/lorem_ipsum"
                 android:textColor="@color/text"
                 android:textSize="@dimen/attr_size"/>
+
+            <LinearLayout
+                android:id="@+id/trailers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

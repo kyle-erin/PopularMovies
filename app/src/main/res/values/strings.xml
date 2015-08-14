@@ -24,4 +24,5 @@
     <string name="placeholder_length">120min</string>
     <string name="placeholder_rating">8.1/10</string>
     <string name="favorite_text">Favorite</string>
+    <string name="trailer_play">A button to play this trailer.</string>
 </resources>

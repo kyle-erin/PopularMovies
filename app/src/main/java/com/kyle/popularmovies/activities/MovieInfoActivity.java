@@ -1,18 +1,23 @@
 package com.kyle.popularmovies.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kyle.popularmovies.R;
 import com.kyle.popularmovies.data.GetTrailersService;
 import com.kyle.popularmovies.data.Movie;
 import com.kyle.popularmovies.data.Trailer;
+import com.kyle.popularmovies.views.TrailerAdapter;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -38,6 +43,11 @@ public class MovieInfoActivity extends Activity
    * Key for fetching trailers.
    */
   private static final String DATA_KEY = "trailers";
+
+  /**
+   * Message to display when loading trailers.
+   */
+  private static final String TRAILER_LOADING_MESSAGE = "Loading Trailers";
 
   /**
    * The selected movie to display information about.
@@ -78,7 +88,25 @@ public class MovieInfoActivity extends Activity
    */
   @Bind( R.id.synopsis )
   TextView mSynopsis;
+
+  /**
+   * List of trailers.
+   */
   private Trailer[] mTrailers;
+
+  /**
+   * Lists all available trailers.
+   */
+  @Bind( R.id.trailers )
+  LinearLayout mTrailersList;
+
+  /**
+   * Displayed while trailers load.
+   */
+  private ProgressDialog mDialog;
+
+  private static String YOUTUBE_SITE = "YouTube";
+
 
   @Override
   protected void onCreate( Bundle savedInstanceState )
@@ -89,6 +117,8 @@ public class MovieInfoActivity extends Activity
     EventBus.getDefault().register( this );
 
     // Fetch trailers
+    mDialog = new ProgressDialog( this );
+    mDialog.setMessage( TRAILER_LOADING_MESSAGE );
     startService( new Intent( this, GetTrailersService.class ) );
 
     // If the selected movie was set, show all of its data.
@@ -99,25 +129,26 @@ public class MovieInfoActivity extends Activity
         Picasso.with( this ).load( TMDB_IMG_URL + mSelected.poster_path ).into( mPoster );
       }
 
-      mTitle.setText((mSelected.original_title == null ||  mSelected.original_title.isEmpty()) ? EMPTY_STR : mSelected.original_title );
-      mRelease.setText( (mSelected.release_date == null || mSelected.release_date.isEmpty()) ? EMPTY_STR : formatDate( mSelected.release_date ) );
-      mVote.setText( (mSelected.vote_average == null || mSelected.vote_average.isEmpty()) ? EMPTY_STR : mSelected.vote_average );
-      mSynopsis.setText( (mSelected.overview == null || mSelected.overview.isEmpty()) ? EMPTY_STR : mSelected.overview );
+      mTitle.setText( ( mSelected.original_title == null || mSelected.original_title.isEmpty() ) ? EMPTY_STR : mSelected.original_title );
+      mRelease.setText( ( mSelected.release_date == null || mSelected.release_date.isEmpty() ) ? EMPTY_STR : formatDate( mSelected.release_date ) );
+      mVote.setText( ( mSelected.vote_average == null || mSelected.vote_average.isEmpty() ) ? EMPTY_STR : mSelected.vote_average );
+      mSynopsis.setText( ( mSelected.overview == null || mSelected.overview.isEmpty() ) ? EMPTY_STR : mSelected.overview );
     }
   }
 
-  private String formatDate(String date)
+  private String formatDate( String date )
   {
     String[] comps = date.split( "-" );
-    return comps.length > 0 ? comps[0] : date;
+    return comps.length > 0 ? comps[ 0 ] : date;
   }
 
   @Override
-  public void onSaveInstanceState(Bundle state) {
+  public void onSaveInstanceState( Bundle state )
+  {
     // Save the current list of data
     state.putParcelableArray( DATA_KEY, mTrailers );
 
-    super.onSaveInstanceState(state);
+    super.onSaveInstanceState( state );
   }
 
   @Override
@@ -130,7 +161,6 @@ public class MovieInfoActivity extends Activity
   @SuppressWarnings( "UnusedDeclaration" )
   public void onEventMainThread( Trailer[] trailers )
   {
-    mTrailers = trailers;
-    Log.i(LOG_TAG, trailers.toString());
+    // TODO Show trailers
   }
 }
